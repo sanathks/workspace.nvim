@@ -99,7 +99,10 @@ local function open_workspace_popup(workspace, options)
     })
   end
 
-  pickers.new({}, {
+  pickers.new({
+    results_title = workspace.name,
+    prompt_title = "Search in " .. workspace.name .. " workspace",
+  }, {
     finder = finders.new_table {
       results = entries,
       entry_maker = function(entry)
