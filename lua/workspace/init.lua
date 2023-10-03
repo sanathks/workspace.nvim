@@ -123,28 +123,27 @@ local function open_workspace_popup(workspace, options)
 end
 
 ---@mod workspace.setup setup
----@param options table Setup options:
+---@param options table Setup options
 --- * {workspaces} (table) List of workspaces
----    ```
----    {
----      { name = "Workspace1", path = "~/path/to/workspace1", keymap = { "<leader>w" } },
----      { name = "Workspace2", path = "~/path/to/workspace2", keymap = { "<leader>x" } },
----    }
----    ```
----    * `name` string: Name of the workspace
----    * `path` string: Path to the workspace
----    * `keymap` table: List of keybindings to open the workspace
+---  ```
+---  {
+---    { name = "Workspace1", path = "~/path/to/workspace1", keymap = { "<leader>w" } },
+---    { name = "Workspace2", path = "~/path/to/workspace2", keymap = { "<leader>x" } },
+---  }
+---  ```
+---  * `name` string: Name of the workspace
+---  * `path` string: Path to the workspace
+---  * `keymap` table: List of keybindings to open the workspace
 ---
 --- * {tmux_session_name_generator} (function) Function that generates the tmux session name
----    example:
----    ```lua
----    function(project_name, workspace_name)
----      local session_name = string.upper(project_name)
----      return session_name
----    end
----    ```
----    * `project_name` string: Name of the project
----    * `workspace_name` string: Name of the workspace
+---  ```lua
+---  function(project_name, workspace_name)
+---    local session_name = string.upper(project_name)
+---    return session_name
+---  end
+---  ```
+---  * `project_name` string: Name of the project
+---  * `workspace_name` string: Name of the workspace
 ---
 function M.setup(user_options)
   local options = vim.tbl_deep_extend("force", default_options, user_options or {})
