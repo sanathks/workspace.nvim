@@ -8,15 +8,16 @@ Effortlessly manage workspaces using Tmux sessions in Neovim. Simplify workspace
 [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ```lua
-  {
-    'sanathks/workspace.nvim',
-    config = function()
-      require("workspace").setup({
-          workspaces = {
-              wip
-          }
-      })
-    end
-  }
+  return {
+  "sanathks/workspace.nvim",
+  config = function()
+    require("workspace").setup({
+      workspaces = {
+        { name = "Work",     path = "~/projects/work",     keymap = { "<leader>w" } },
+        { name = "Personal", path = "~/projects/personal", keymap = { "<leader>p" } },
+      }
+    })
+  end,
+}
 ```
 
