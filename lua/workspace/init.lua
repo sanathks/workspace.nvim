@@ -110,7 +110,7 @@ local function open_workspace_popup(workspace, options)
         }
       end,
     },
-    sorter = sorters.get_generic_fuzzy_sorter(),
+    sorter = sorters.get_fuzzy_file(),
     attach_mappings = function()
       action_set.select:replace(function(prompt_bufnr)
         local selection = action_state.get_selected_entry(prompt_bufnr)
