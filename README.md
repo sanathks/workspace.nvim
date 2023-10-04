@@ -1,7 +1,10 @@
 # Workspace.nvim
-Effortlessly manage workspaces using Tmux sessions in Neovim. Simplify workspace navigation and organization with ease
+Effortlessly manage workspaces using Tmux sessions in Neovim. Simplify workspace navigation and organization with ease 
 
 ![1003](https://github.com/sanathks/workspace.nvim/assets/4918600/7040f301-941e-4c70-82fa-1dd05955eaf4)
+
+## Introduction 
+Inspired by ThePrimeagen's [tmux-sessionizer](https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer)
 
 ## Installation
 
