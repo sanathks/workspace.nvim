@@ -3,7 +3,7 @@
 ---@divider
 ---@mod workspace.introduction Introduction
 ---@brief [[
---- workspace.nvim is a plugin that allows you to janage tmux session
+--- workspace.nvim is a plugin that allows you to manage tmux session
 --- for your projects and workspaces in a simple and efficient way.
 ---@brief ]]
 local M = {}
@@ -99,6 +99,11 @@ local function open_workspace_popup(workspace, options)
   }):find()
 end
 
+---@divider
+---@mod workspace.tmux_sessions Tmux Sessions Selector
+---@brief [[
+--- workspace.tmux_sessions allows to list and select tmux sessions
+---@brief ]]
 function M.tmux_sessions()
   if not tmux.is_running() then
     vim.api.nvim_err_writeln("Tmux is not running")
