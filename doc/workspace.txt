@@ -2,13 +2,19 @@
 Table of Contents                                               *workspace.nvim*
 
 Introduction ·········································· |workspace.introduction|
+Tmux Sessions Selector ······························· |workspace.tmux_sessions|
 setup ························································ |workspace.setup|
 
 ==============================================================================
 Introduction                                            *workspace.introduction*
 
- workspace.nvim is a plugin that allows you to janage tmux session
+ workspace.nvim is a plugin that allows you to manage tmux session
  for your projects and workspaces in a simple and efficient way.
+
+==============================================================================
+Tmux Sessions Selector                                 *workspace.tmux_sessions*
+
+ workspace.tmux_sessions allows to list and select tmux sessions
 
 M.tmux_sessions()                                              *M.tmux_sessions*
 
