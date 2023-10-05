@@ -3,10 +3,17 @@
 ---@divider
 ---@mod workspace.introduction Introduction
 ---@brief [[
---- workspace.nvim is a plugin that allows you to manage tmux session
+--- workspace.nvim is a plugin that allows you to janage tmux session
 --- for your projects and workspaces in a simple and efficient way.
 ---@brief ]]
 local M = {}
+local finders = require('telescope.finders')
+local pickers = require('telescope.pickers')
+local sorters = require('telescope.sorters')
+local actions = require('telescope.actions')
+local action_set = require("telescope.actions.set")
+local action_state = require("telescope.actions.state")
+local tmux = require("workspace.tmux")
 
 local function validate_workspace(workspace)
   if not workspace.name or not workspace.path or not workspace.keymap then
@@ -39,46 +46,13 @@ local default_options = {
   end
 }
 
-local function manage_tmux_session(project_path, workspace, options)
-  local project_name
-  if project_path == "newProject" then
-    project_name = vim.fn.input("Enter project name: ")
-    if project_name and #project_name > 0 then
-      project_path = vim.fn.fnamemodify(vim.fn.expand(workspace.path .. "/" .. project_name), ":p")
-      os.execute("mkdir -p " .. project_path)
-    end
-  else
-    project_name = project_path:match("./([^/]+)$");
-  end
 
-  local session_name = options.tmux_session_name_generator(project_name, workspace.name)
+local function open_workspace_popup(workspace, options)
 
-  if session_name == nil then
-    session_name = string.upper(project_name)
-  end
-  session_name = session_name:gsub("[^%w_]", "_")
-
-  local tmux_running = os.execute("pgrep tmux > /dev/null")
-  if tmux_running ~= 0 then
+  if not tmux.is_running() then
     vim.api.nvim_err_writeln("Tmux is not running")
     return
   end
-
-  local tmux_session_check = os.execute("tmux has-session -t=" .. session_name .. " 2> /dev/null")
-  if tmux_session_check ~= 0 then
-    os.execute("tmux new-session -ds " .. session_name .. " -c " .. project_path)
-  end
-
-  os.execute("tmux switch-client -t " .. session_name)
-end
-
-local function open_workspace_popup(workspace, options)
-  local finders = require('telescope.finders')
-  local pickers = require('telescope.pickers')
-  local sorters = require('telescope.sorters')
-  local actions = require('telescope.actions')
-  local action_set = require("telescope.actions.set")
-  local action_state = require("telescope.actions.state")
 
   local workspace_path = vim.fn.expand(workspace.path) -- Expand the ~ symbol
   local folders = vim.fn.globpath(workspace_path, '*', 1, 1)
@@ -118,7 +92,50 @@ local function open_workspace_popup(workspace, options)
       action_set.select:replace(function(prompt_bufnr)
         local selection = action_state.get_selected_entry(prompt_bufnr)
         actions.close(prompt_bufnr)
-        manage_tmux_session(selection.value, workspace, options)
+        tmux.manage_session(selection.value, workspace, options)
+      end)
+      return true
+    end,
+  }):find()
+end
+
+function M.tmux_sessions()
+  if not tmux.is_running() then
+    vim.api.nvim_err_writeln("Tmux is not running")
+    return
+  end
+
+  local sessions = vim.fn.systemlist('tmux list-sessions -F "#{session_name}"')
+
+  local entries = {}
+  for _, session in ipairs(sessions) do
+    table.insert(entries, {
+      value = session,
+      display = session,
+      ordinal = session,
+    })
+  end
+
+  pickers.new({
+    results_title = "Tmux Sessions",
+    prompt_title = "Select a Tmux session",
+  }, {
+    finder = finders.new_table {
+      results = entries,
+      entry_maker = function(entry)
+        return {
+          value = entry.value,
+          display = entry.display,
+          ordinal = entry.ordinal,
+        }
+      end,
+    },
+    sorter = sorters.get_fuzzy_file(),
+    attach_mappings = function()
+      action_set.select:replace(function(prompt_bufnr)
+        local selection = action_state.get_selected_entry(prompt_bufnr)
+        actions.close(prompt_bufnr)
+        tmux.attach(selection.value)
       end)
       return true
     end,
@@ -171,4 +188,3 @@ function M.setup(user_options)
 end
 
 return M
-
