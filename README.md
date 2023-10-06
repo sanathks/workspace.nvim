@@ -4,7 +4,7 @@
 
 workspace.nvim is a Neovim plugin that allows you to manage Tmux sessions for your projects and workspaces in a simple and efficient way.
 
-![1006](https://github.com/sanathks/workspace.nvim/assets/4918600/9e451b20-7e2c-4577-8ad8-9d09308693f3)
+![workspace.nvim](https://github.com/sanathks/workspace.nvim/assets/4918600/9e451b20-7e2c-4577-8ad8-9d09308693f3)
 
 
 ## Introduction 
@@ -37,7 +37,7 @@ Inspired by ThePrimeagen's [tmux-sessionizer](https://github.com/ThePrimeagen/.d
 
 ## Switch between tmux sessions 
  
-![Open tmux sessions](https://github.com/sanathks/workspace.nvim/assets/4918600/e300869f-0e2c-4eaa-a347-62fbb450ee4e)
+![tmux sessions](https://github.com/sanathks/workspace.nvim/assets/4918600/961ce94d-943b-4416-b2b0-8a71655da929)
 
 
 ```lua
