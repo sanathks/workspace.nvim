@@ -30,7 +30,8 @@ Inspired by ThePrimeagen's [tmux-sessionizer](https://github.com/ThePrimeagen/.d
 ![Open tmux sessions](https://github.com/sanathks/workspace.nvim/assets/4918600/e300869f-0e2c-4eaa-a347-62fbb450ee4e)
 
 
-```lua 
+```lua
+ local workspace = require("workspace")
  vim.keymap.set('n', '<leader>ps', workspace.tmux_sessions)
 ```
 
