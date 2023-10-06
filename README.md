@@ -4,7 +4,8 @@
 
 workspace.nvim is a Neovim plugin that allows you to manage Tmux sessions for your projects and workspaces in a simple and efficient way.
 
-![workspace.nvim](https://github.com/sanathks/workspace.nvim/assets/4918600/7040f301-941e-4c70-82fa-1dd05955eaf4)
+![1006](https://github.com/sanathks/workspace.nvim/assets/4918600/9e451b20-7e2c-4577-8ad8-9d09308693f3)
+
 
 ## Introduction 
 Inspired by ThePrimeagen's [tmux-sessionizer](https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer)
