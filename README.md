@@ -45,6 +45,20 @@ Inspired by ThePrimeagen's [tmux-sessionizer](https://github.com/ThePrimeagen/.d
  vim.keymap.set('n', '<leader>ps', workspace.tmux_sessions)
 ```
 
+## Customize the session name generation
+
+with the `tmux_session_name_generator` option you can provide a custom session name generator, which allows you to make the session name unique across multiple workspaces. 
+
+ ```lua
+function(project_name, workspace_name)
+   local suffix = string.sub(workspace_name, 1, 2)
+   local session_name = string.upper(project_name) .. "_" .. suffix
+    return session_name
+end
+
+```
+
+
 ## Contributing
 Contributions are welcome! If you find any issues or have ideas for improvements, please open an issue or submit a pull request.
 
