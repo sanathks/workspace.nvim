@@ -188,7 +188,7 @@ function M.setup(user_options)
   for _, workspace in ipairs(options.workspaces or {}) do
     vim.keymap.set('n', workspace.keymap[1], function()
       open_workspace_popup(workspace, options)
-    end, { noremap = true })
+    end, { noremap = true, desc = workspace.keymap.desc or ("Open workspace " .. workspace.name) })
   end
 end
 
