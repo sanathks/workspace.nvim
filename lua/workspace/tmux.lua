@@ -36,7 +36,8 @@ end
 
 function M.is_running()
   local tmux_running = os.execute("pgrep tmux > /dev/null")
-  if tmux_running == 0 then
+  local in_tmux = vim.fn.exists('$TMUX') == 1
+  if tmux_running == 0 and in_tmux then
     return true
   end
   return false

@@ -50,7 +50,7 @@ local default_options = {
 local function open_workspace_popup(workspace, options)
 
   if not tmux.is_running() then
-    vim.api.nvim_err_writeln("Tmux is not running")
+    vim.api.nvim_err_writeln("Tmux is not running or not in a tmux session")
     return
   end
 
@@ -106,7 +106,7 @@ end
 ---@brief ]]
 function M.tmux_sessions()
   if not tmux.is_running() then
-    vim.api.nvim_err_writeln("Tmux is not running")
+    vim.api.nvim_err_writeln("Tmux is not running or not in a tmux session")
     return
   end
 
